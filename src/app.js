@@ -4,10 +4,18 @@ let PORT = process.env.PORT || 3000;
 let path = require("path")
 let hbs = require("hbs")
 
+
+
+
+
+app.use(express.urlencoded({ extended: false }))
 // database connection
 require("./db/conn")
-// tailwinndcss
-app.use(express.static('public'));
+
+
+// user model importing
+
+let User = require("./model/userMessage")
 
 // // static website path and setting up
 // let x = path.join(__dirname  ,  "../public")
@@ -47,6 +55,21 @@ app.get("/contact", (req, res) => {
     res.render("contact")
 })
 
+
+
+app.post("/contact", async (req, res) => {
+    try {
+
+
+        let userData = new User(req.body)
+        await userData.save();
+        res.status(200).render("index")
+
+    } catch (error) {
+        // res.status(500).send("error in sving the contact form")
+        res.status(500).send(error)
+    }
+})
 
 
 // running of this file
