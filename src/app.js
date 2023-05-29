@@ -17,13 +17,6 @@ require("./db/conn")
 
 let User = require("./model/userMessage")
 
-// // static website path and setting up
-// let x = path.join(__dirname  ,  "../public")
-// console.log(x)
-// let static_website_path = path.join(x) ; 
-// app.use(express.static(static_website_path))
-
-
 
 // linking bootstrap and jquery
 app.use("/css", express.static(path.join(__dirname, "../node_modules/bootstrap/dist/css")))
@@ -31,10 +24,6 @@ app.use("/js", express.static(path.join(__dirname, "../node_modules/bootstrap/di
 app.use("/jq", express.static(path.join(__dirname, "../node_modules/jquery/dist")))
 
 
-
-
-// // to set hbs to use in dynamic website
-// app.set("view engine" , "hbs")
 
 // setting path for using template folder
 app.set("view engine", "hbs")
@@ -66,7 +55,6 @@ app.post("/contact", async (req, res) => {
         res.status(200).render("index")
 
     } catch (error) {
-        // res.status(500).send("error in sving the contact form")
         res.status(500).send(error)
     }
 })
