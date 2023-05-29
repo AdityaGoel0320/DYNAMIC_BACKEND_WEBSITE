@@ -6,8 +6,8 @@ let hbs = require("hbs")
 
 // database connection
 require("./db/conn")
-
-
+// tailwinndcss
+app.use(express.static('public'));
 
 // // static website path and setting up
 // let x = path.join(__dirname  ,  "../public")
@@ -25,13 +25,26 @@ app.use("/jq", express.static(path.join(__dirname, "../node_modules/jquery/dist"
 
 
 
-// to set hbs to use in dynamic website
-app.set("view engine" , "hbs")
+// // to set hbs to use in dynamic website
+// app.set("view engine" , "hbs")
 
+// setting path for using template folder
+app.set("view engine", "hbs")
+let template_path = path.join(__dirname, "../templates/views")
+app.set("views", template_path)
+
+
+// setting to partials
+let partials_path = path.join(__dirname, "../templates/partials")
+hbs.registerPartials(partials_path)
 
 // routing
 app.get("/", (req, res) => {
     res.render("index")
+})
+
+app.get("/contact", (req, res) => {
+    res.render("contact")
 })
 
 
