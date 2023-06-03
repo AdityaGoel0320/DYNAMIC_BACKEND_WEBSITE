@@ -35,6 +35,11 @@ app.set("views", template_path)
 let partials_path = path.join(__dirname, "../templates/partials")
 hbs.registerPartials(partials_path)
 
+
+
+// Serve static files from the public directory
+app.use(express.static('public'));
+
 // routing
 app.get("/", (req, res) => {
     res.render("index")
